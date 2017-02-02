@@ -1,31 +1,29 @@
-# icemobile
+# Parkinglot
 
-> Icemobile parking lot cost calculator
+> Parking lot cost calculator
 
 ## About
 
 This project uses [Feathers](http://feathersjs.com). An open source web framework for building modern real-time applications.
 
+The front end uses [React](https://facebook.github.io/react/) and [Redux](http://redux.js.org/) for the Parkinglot UI logic.
+
 ## Getting Started
 
 Getting up and running is as easy as 1, 2, 3.
 
-1. Make sure you have [NodeJS](https://nodejs.org/) and [npm](https://www.npmjs.com/) installed.
+1. Make sure you have [NodeJS](https://nodejs.org/) v6.9.4 and [yarn](https://github.com/yarnpkg/yarn) installed globally.
 2. Install your dependencies
-    
+
     ```
-    cd path/to/icemobile; npm install
+    cd path/to/parkinglot-calculator; yarn
     ```
 
 3. Start your app
-    
-    ```
-    npm start
-    ```
 
-## Testing
-
-Simply run `npm test` and all your tests in the `test/` directory will be run.
+    ```
+    yarn start
+    ```
 
 ## Scaffolding
 
@@ -52,6 +50,6 @@ __0.1.0__
 
 ## License
 
-Copyright (c) 2016
+Copyright (c) 2017
 
 Licensed under the [MIT license](LICENSE).
