@@ -1,6 +1,6 @@
 # Parkinglot
 
-> Parking lot cost calculator
+> Parkinglot cost calculator
 
 ## About
 
@@ -12,11 +12,11 @@ The front end uses [React](https://facebook.github.io/react/) and [Redux](http:/
 
 Getting up and running is as easy as 1, 2, 3.
 
-1. Make sure you have [NodeJS](https://nodejs.org/) v6.9.4 and [yarn](https://github.com/yarnpkg/yarn) installed globally.
+1. Make sure you have [NodeJS](https://nodejs.org/) (built with v6.9.4) and [yarn](https://github.com/yarnpkg/yarn) installed globally.
 2. Install your dependencies
 
     ```
-    cd path/to/parkinglot-calculator; yarn
+    cd path/to/parkinglot; yarn
     ```
 
 3. Start your app
