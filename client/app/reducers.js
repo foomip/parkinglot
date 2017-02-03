@@ -1,8 +1,10 @@
-import { Map } from 'immutable'
+import { Map, List } from 'immutable'
 
 import actionTypes from 'app/constants'
 
-const $$initialParkinglotState = Map({})
+const $$initialParkinglotState = Map({
+  parkingLotIds:    List()
+})
 
 function parkinglotReducer ($$state=$$initialParkinglotState, action={}) {
   switch(action.type) {

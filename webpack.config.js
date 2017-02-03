@@ -1,6 +1,7 @@
 const path              = require('path')
 const webpack           = require('webpack')
 const HTMLWebpackPlugin = require('html-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 const devBuild = process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'staging'
 
@@ -20,11 +21,15 @@ const configs = {
     publicPath: '/'
   },
   module: {
-    loaders:[
+    loaders: [
       {
         test:     /\.jsx?$/,
         exclude:  /node_modules/,
         loaders:  ['babel-loader']
+      },
+      {
+        test: /\.css$/,
+        use:  [ 'style-loader', 'css-loader' ]
       }
     ]
   },
@@ -36,7 +41,8 @@ const configs = {
     modules: [
       path.resolve('client'),
       path.resolve('node_modules')
-    ]
+    ],
+    extensions: ['.js', '.jsx', '.json']
   }
 }
 
