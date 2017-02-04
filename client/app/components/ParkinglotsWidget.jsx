@@ -7,6 +7,7 @@ export default class ParkinglotsWidget extends React.Component {
     return (
       <div className='container parkinglot-container'>
         <CarAddForm />
+        <hr />
       </div>
     )
   }

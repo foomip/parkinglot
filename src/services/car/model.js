@@ -4,6 +4,7 @@ import moment from 'moment'
 import async from 'async'
 
 import parkinglotOpenAt from '../parkinglotOpenAt'
+import { assignCarToParkinglot, unassignCarFromParkingLot } from '../parkinglot/model'
 
 const db                  = levelup(memdown)
 const hourlyCostCents     = 120
@@ -41,6 +42,28 @@ export function createCar(data) {
       })
     }
     else reject(new Error(`Car record with licenseplate ${data.licenseplate} has an invalid parkingtime`))
+  })
+}
+
+export function createOrUpdateCar(data) {
+  return new Promise((resolve, reject)=> {
+    getCar(data.licenseplate)
+      .then((existingCar)=> {
+        unassignCarFromParkingLot(existingCar.parkinglotid, existingCar.licenseplate)
+          .then(()=> assignCarToParkinglot(data.parkinglotid, data.licenseplate))
+          .then(()=> createCar(data))
+          .then(()=> resolve(data))
+          .catch(reject)
+      })
+      .catch(err => {
+        if(err.notFound) {
+          assignCarToParkinglot(data.parkinglotid, data.licenseplate)
+            .then(()=> createCar(data))
+            .then(()=> resolve(data))
+            .catch(reject)
+        }
+        else reject(err)
+      })
   })
 }
 

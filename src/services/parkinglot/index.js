@@ -10,14 +10,12 @@ export class Service {
     this.options = options || {}
   }
 
-  create(data, params) {
+  create(data) {
     if(data.cars && data.cars.car) {
       return new Promise((resolve, reject)=> {
         async.eachSeries(data.cars.car, (carData, next)=> {
           createCar(carData.$)
-            .then(id => {
-              assignCarToParkinglot(carData.$.parkinglotid, id)
-            })
+            .then(id => assignCarToParkinglot(carData.$.parkinglotid, id))
             .then(next)
             .catch(next)
         }, (err)=> {

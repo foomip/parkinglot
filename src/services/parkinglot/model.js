@@ -1,7 +1,6 @@
 import levelup from 'levelup'
 import memdown from 'memdown'
 import { Set } from 'immutable'
-import moment from 'moment'
 
 const db = levelup(memdown)
 
@@ -33,7 +32,21 @@ export function assignCarToParkinglot (parkinglotId, carId) {
   })
 }
 
-export function getParkingLotIds () {
+export function unassignCarFromParkingLot (parkinglotId, carId) {
+  return new Promise((resolve, reject)=> {
+    fetchKeysFor(parkinglotId)
+      .then(keys => {
+        const filteredKeys = keys.filter(key => key !== carId)
+
+        db.put(`parkinglot_${parkinglotId}`, JSON.stringify(filteredKeys), err => {
+          if(err) reject(err)
+          else resolve()
+        })
+      })
+  })
+}
+
+export function getParkinglotIds () {
   return new Promise((resolve, reject)=> {
     const keys = []
 
