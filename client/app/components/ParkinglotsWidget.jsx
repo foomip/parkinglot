@@ -12,7 +12,7 @@ export default class ParkinglotsWidget extends React.Component {
   renderParkingLots () {
     const { parkinglots } = this.props
 
-    if(parkinglots.length === 0)
+    if(parkinglots.size === 0)
       return (
         <div className='text-center'>
           <p>(no parking lots heave been created, add a car to start seeing things here)</p>
