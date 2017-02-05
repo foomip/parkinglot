@@ -31,7 +31,9 @@ export default class Parkinglot extends React.Component {
     return (
       <div className='columns text-center'>
         <div className='col-12'>
-          <h4>{`Parkinglot ID ${this.props.parkinglotId}`}</h4>
+          <h4>
+            Parkinglot ID <strong>{this.props.parkinglotId}</strong>
+          </h4>
         </div>
         <div className='col-12'>
           {
