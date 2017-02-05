@@ -5,6 +5,7 @@ import async from 'async'
 
 import parkinglotOpenAt from '../parkinglotOpenAt'
 import { assignCarToParkinglot, unassignCarFromParkingLot } from '../parkinglot/model'
+import { broadcastParkinglotChanged } from '../../websocket'
 
 const db                  = levelup(memdown)
 const hourlyCostCents     = 120
@@ -50,8 +51,10 @@ export function createOrUpdateCar(data) {
     getCar(data.licenseplate)
       .then((existingCar)=> {
         unassignCarFromParkingLot(existingCar.parkinglotid, existingCar.licenseplate)
+          .then(()=> broadcastParkinglotChanged(existingCar.parkinglotid))
           .then(()=> assignCarToParkinglot(data.parkinglotid, data.licenseplate))
           .then(()=> createCar(data))
+          .then(()=> broadcastParkinglotChanged(data.parkinglotid))
           .then(()=> resolve(data))
           .catch(reject)
       })
@@ -59,6 +62,7 @@ export function createOrUpdateCar(data) {
         if(err.notFound) {
           assignCarToParkinglot(data.parkinglotid, data.licenseplate)
             .then(()=> createCar(data))
+            .then(()=> broadcastParkinglotChanged(data.parkinglotid))
             .then(()=> resolve(data))
             .catch(reject)
         }

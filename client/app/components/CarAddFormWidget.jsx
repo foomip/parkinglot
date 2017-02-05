@@ -113,7 +113,7 @@ export default class CarAddFormWidget extends React.Component {
   licensePlateNumberValid () {
     const { licensePlateNumber } = this.state
 
-    return licensePlateNumber != null && /^\d\d\-\w\w\-\d\d$/i.test(licensePlateNumber.val)
+    return licensePlateNumber != null && /^\d+\-[a-z]+\-\d+$/i.test(licensePlateNumber.val)
   }
 
   parkinglotOptions () {

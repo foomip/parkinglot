@@ -4,6 +4,7 @@ import { BadRequest } from 'feathers-errors'
 import { before, after } from './hooks'
 import { createCar } from '../car/model'
 import { assignCarToParkinglot } from './model'
+import { broadcastRefreshParkingLots } from '../../websocket'
 
 export class Service {
   constructor(options) {
@@ -20,7 +21,10 @@ export class Service {
             .catch(next)
         }, (err)=> {
           if(err) reject(err)
-          else    resolve({status: 'success', description: 'request processed successfully'})
+          else    {
+            broadcastRefreshParkingLots()
+              .then(()=> resolve({status: 'success', description: 'request processed successfully'}))
+          }
         })
       })
     }

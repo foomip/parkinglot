@@ -1,7 +1,6 @@
 const path              = require('path')
 const webpack           = require('webpack')
 const HTMLWebpackPlugin = require('html-webpack-plugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 const devBuild = process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'staging'
 
@@ -30,6 +29,10 @@ const configs = {
       {
         test: /\.css$/,
         use:  [ 'style-loader', 'css-loader' ]
+      },
+      {
+        test: /\.sass$/,
+        use:  ['style-loader', 'css-loader', 'sass-loader']
       }
     ]
   },

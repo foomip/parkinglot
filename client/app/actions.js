@@ -8,17 +8,23 @@ export function addCarToParkinglot ({licensePlateNumber, carBrandName, parkinglo
     const data = {
       brand:          carBrandName,
       licenseplate:   licensePlateNumber,
-      parkingotid:    parkinglotId,
+      parkinglotid:   parkinglotId,
       parkingtime:    moment().utc().format('YYYY-MM-DDTHH:mm:ssZ')
     }
 
-    console.log(data);
-
     axios.post('/cars', data)
       .then(response => {
-        dispatch({type: actionTypes.CAR_ADDED, data: response.data})
         onAdded()
+        dispatch({type: actionTypes.CAR_ADDED, data: response.data})
       })
       .catch(err => dispatch({type: actionTypes.CAR_ADD_FAILED, error: err}))
   }
+}
+
+export function parkinglotsRefreshed (parkinglots) {
+  return {type: actionTypes.PARKINGLOTS_REFRESHED, parkinglots}
+}
+
+export function parkinglotChanged (parkinglot) {
+  return {type: actionTypes.PARKINGLOT_CHANGED, ...parkinglot}
 }

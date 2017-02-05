@@ -12,6 +12,7 @@ import xmlparser from 'express-xml-bodyparser'
 import socketio from 'feathers-socketio'
 import middleware from './middleware'
 import services from './services'
+import websocket from './websocket'
 
 const app = feathers()
 
@@ -27,7 +28,7 @@ app.use(compress())
   .use(xmlparser())
   .configure(hooks())
   .configure(rest())
-  .configure(socketio())
+  .configure(socketio(websocket))
   .configure(services)
   .configure(middleware)
 
